@@ -20,11 +20,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Debug event info
-        run: echo "Triggered by workflow run of ${{ github.event.workflow_run.name }}"
-
       - name: Checkout repo 
         uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
 
       - name: Login to ECR 
         run: |
