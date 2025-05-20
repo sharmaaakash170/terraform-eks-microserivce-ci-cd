@@ -39,11 +39,11 @@ jobs:
 
       - name: Terraform Plan
         working-directory: environments/dev
-        run: terraform plan -auto-approve -input=false 
+        run: terraform plan -input=false 
 
       - name: Terraform Apply
         working-directory: environments/dev
-        run: terraform apply  -input=false 
+        run: terraform apply -auto-approve -input=false 
 
       - name: Login to ECR 
         run: |
