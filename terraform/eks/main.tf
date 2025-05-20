@@ -5,7 +5,6 @@ resource "aws_eks_cluster" "this" {
 
   vpc_config {
     subnet_ids = var.subnet_ids
-    vpc_id = var.vpc_id
     endpoint_public_access = true
   }
 }
