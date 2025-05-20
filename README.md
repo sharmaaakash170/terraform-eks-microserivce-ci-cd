@@ -50,6 +50,3 @@ I'm actively seeking **DevOps Engineer** roles where I can apply and grow my clo
 
 ---
 
-### 📷 Architecture Diagram
-
-![Architecture Diagram](./diagram.png)
