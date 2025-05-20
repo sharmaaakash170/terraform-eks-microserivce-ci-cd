@@ -45,6 +45,6 @@ jobs:
           kubectl apply -f k8s/deployment.yaml
           kubectl apply -f k8s/service.yaml
 
-      - name: Destroy Infra 
+      - name: Terraform Apply
         working-directory: environments/dev
-        run: terraform destroy --auto-approve
+        run: terraform destroy -auto-approve -input=false
