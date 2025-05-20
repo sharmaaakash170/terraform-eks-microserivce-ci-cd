@@ -1,9 +1,16 @@
-name: CICD Pipeline
+name: App Deployment Pipeline
 
-on: 
-  push: 
+on:
+  workflow_run:
+    workflows: ["Terraform Infra Pipeline"]
+    types:
+      - completed
+
+  push:
     branches:
       - main
+
+  workflow_dispatch:
 
 env:
   AWS_REGION: us-east-1
@@ -14,43 +21,25 @@ env:
 
 jobs:
   deploy:
-    name: CICD
+    name: Deploy to EKS
     runs-on: ubuntu-latest
+    # ✅ Run only if:
+    # - workflow_run was successful, OR
+    # - event is push or workflow_dispatch
+    if: |
+      github.event_name != 'workflow_run' ||
+      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success')
 
     steps:
       - name: Checkout repo 
         uses: actions/checkout@v3
-
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
-      
-      - name: Ensure backend bucket exists
-        run: |
-          aws s3api head-bucket --bucket terraform-eks-microserivce-ci-cd-s3-bucket || \
-          aws s3api create-bucket --bucket terraform-eks-microserivce-ci-cd-s3-bucket --region us-east-1
-
-      - name: Terraform Init
-        working-directory: environments/dev
-        run: terraform init 
-
-      - name: Terraform Format
-        working-directory: environments/dev
-        run: terraform fmt -recursive
-
-      - name: Terraform Plan
-        working-directory: environments/dev
-        run: terraform plan -input=false 
-
-      - name: Terraform Apply
-        working-directory: environments/dev
-        run: terraform apply -auto-approve -input=false 
 
       - name: Login to ECR 
         run: |
           aws ecr get-login-password --region $AWS_REGION | \
           docker login --username AWS --password-stdin 891062950211.dkr.ecr.$AWS_REGION.amazonaws.com
       
-      - name: Build and Push image
+      - name: Build and Push Docker Image
         run: |
           docker build -t $ECR_REPO_NAME ./app
           docker tag $ECR_REPO_NAME:latest 891062950211.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO_NAME:latest
