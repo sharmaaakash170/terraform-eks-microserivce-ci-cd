@@ -14,7 +14,7 @@ spec:
     spec: 
       containers:
         - name: eks-app 
-          image: 891062950211.dkr.ecr.us-east-1.amazonaws.com/terraform-eks-microserivce-ci-cd-ecr-repo:latest
+          image: 891062950211.dkr.ecr.us-east-1.amazonaws.com/terraform-eks-microservices-ci-cd-ecr-repo:latest
           ports: 
             - containerPort: 80 
           resources:
