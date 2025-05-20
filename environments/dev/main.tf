@@ -29,4 +29,5 @@ module "eks" {
   eks_node_role_arn = module.iam.eks_node_role_arn
   instance_types = var.instance_types
   project_name = var.project_name
+  depends_on = [ module.iam, module.vpc ]
 }

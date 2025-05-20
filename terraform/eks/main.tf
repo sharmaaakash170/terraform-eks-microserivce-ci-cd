@@ -8,8 +8,6 @@ resource "aws_eks_cluster" "this" {
     vpc_id = var.vpc_id
     endpoint_public_access = true
   }
-
-  depends_on = [ aws_iam_role_policy_attachment.cluster_role_policy ]
 }
 
 resource "aws_eks_node_group" "this" {
