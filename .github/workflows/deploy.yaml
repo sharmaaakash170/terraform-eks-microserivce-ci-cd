@@ -9,7 +9,7 @@ on:
 
 env:
   AWS_REGION: us-east-1
-  EKS_CLUSTER_NAME: terraform-eks-microserivce-ci-cd-cluster
+  EKS_CLUSTER_NAME: terraform-eks-microservices-ci-cd-eks-cluster
   ECR_REPO_NAME: terraform-eks-microserivce-ci-cd-ecr-repo
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
