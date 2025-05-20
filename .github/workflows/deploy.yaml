@@ -33,9 +33,8 @@ jobs:
       
       - name: Build and Push Docker Image
         run: |
-          docker build -t $ECR_REPO_NAME ./app
-          docker tag $ECR_REPO_NAME:latest 891062950211.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO_NAME:latest
-          docker push 891062950211.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO_NAME:latest
+          docker build -t 891062950211.dkr.ecr.us-east-1.amazonaws.com/terraform-eks-microservices-ci-cd-ecr-repo:latest ./app
+          docker push 891062950211.dkr.ecr.us-east-1.amazonaws.com/terraform-eks-microservices-ci-cd-ecr-repo:latest
 
       - name: Update kubeconfig
         run: |
