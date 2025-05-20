@@ -22,7 +22,7 @@ jobs:
     steps:
       - name: Debug event info
         run: echo "Triggered by workflow run of ${{ github.event.workflow_run.name }}"
-        
+
       - name: Checkout repo 
         uses: actions/checkout@v3
 
