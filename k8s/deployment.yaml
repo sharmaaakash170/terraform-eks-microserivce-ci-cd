@@ -1,0 +1,26 @@
+apiVersion: apps/v1 
+kind: Deployment 
+metadata:
+  name: eks-app
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      app: eks-app 
+  template:
+    metadata:
+      labels:
+        app: eks-app 
+    spec: 
+      containers:
+        - name: eks-app 
+          image: 891062950211.dkr.ecr.us-east-1.amazonaws.com/terraform-eks-microserivce-ci-cd-ecr-repo:latest
+          ports: 
+            - containerPort: 80 
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "200m"
+              memory: "256Mi"
