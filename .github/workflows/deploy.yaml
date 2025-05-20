@@ -1,9 +1,15 @@
 name: App Deployment Pipeline
 
 on:
+  workflow_run:
+    workflows: ["Terraform Infra Pipeline"]
+    types:
+      - completed
+
   push:
     branches:
       - main
+
   workflow_dispatch:
 
 env:
@@ -17,6 +23,9 @@ jobs:
   deploy:
     name: Deploy to EKS
     runs-on: ubuntu-latest
+    if: |
+      github.event_name != 'workflow_run' ||
+      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success')
 
     steps:
       - name: Checkout repo 
