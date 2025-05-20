@@ -5,6 +5,7 @@ on:
     workflows: ["Terraform Infra Pipeline"]
     types:
       - completed
+      # test
   workflow_dispatch:
 
 env:
