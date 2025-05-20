@@ -39,7 +39,7 @@ jobs:
 
       - name: Terraform Plan
         working-directory: environments/dev
-        run: terraform plan -input=false 
+        run: terraform plan -auto-approve -input=false 
 
       - name: Terraform Apply
         working-directory: environments/dev
