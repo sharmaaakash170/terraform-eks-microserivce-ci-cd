@@ -7,11 +7,11 @@ variable "project_name" {
 }
 
 variable "public_subnet_cidrs" {
-  type = string
+  type = list(string)
 }
 
 variable "private_subnet_cidrs" {
-  type = string
+  type = list(string)
 }
 
 variable "availability_zone" {
